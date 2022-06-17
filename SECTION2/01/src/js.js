@@ -1,32 +1,33 @@
-$(function() {
-    $(window).scroll(function() {
-        getPercent();
-    })
+window.onload = function() {
 
-    function getPercent() {
-        var scrollHeight = $('.sec01').height();
-        var scrollRealHeight = scrollHeight - $(window).height();
-        var winScrollTop = $(window).scrollTop();
+    var text = document.querySelector('.progress .txt');
+    var progressBar = document.querySelector('.progress .bar');
+
+    function getPercent(){
+
+        var scrollHeight = document.querySelector('.sec01').offsetHeight;
+        var scrollRealHeight = scrollHeight - window.innerHeight;
+        var winScrollTop = window.pageYOffset;
         var scrollPercent = (winScrollTop / scrollRealHeight) * 100;
         var textPercent = Math.round(scrollPercent);
 
-        render(textPercent, scrollPercent);
-    }
+        render(textPercent,scrollPercent);
+    };
 
-    var progressBar = $('.progress .bar');
-    var text = $('.progress .txt');
+    function render(textPercent,scrollPercent){
+        text.innerText = textPercent + '%';
 
-    function render(textPercent, scrollPercent) {
-        progressBar.css({
-            width: scrollPercent + '%'
-        });
+        progressBar.style.width = scrollPercent + '%';
+    };
 
-        text.text(textPercent + '%');
-    }
-
-    function init() {
+    function init(){
         getPercent();
-    }
+    };
 
-    init();
-});
+    document.addEventListener('scroll', function() {
+        getPercent();
+    }, false);
+
+    init(); //초기화
+
+};

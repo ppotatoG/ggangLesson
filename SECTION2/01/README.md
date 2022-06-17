@@ -1,4 +1,4 @@
-# 이동핧 거리 백분율 구하기
+# 이동할 거리 백분율 구하기
 
 ## [HTML article](https://developer.mozilla.org/ko/docs/Web/HTML/Element/article)
 
@@ -11,3 +11,9 @@
 
 
 [section article 차이](https://moo-you.tistory.com/m/406)
+
+## [Math.round()](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Math/round)
+
+[Math.floor](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Math/floor) 올림
+
+[Math.ceil](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Math/ceil) 내림
