@@ -17,3 +17,31 @@
 [Math.floor](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Math/floor) 올림
 
 [Math.ceil](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Math/ceil) 내림
+
+## scrollY vs pageYOffset
+
+
+[[자바스크립트] scrollY vs pageYOffset 무엇을 써야하나?](https://studyhardgogo.tistory.com/186)
+
+## [화살표 함수](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+
+[함수 호출 방식에 의해 결정되는 this](https://poiemaweb.com/js-this)
+
+```js
+function test (param) {
+    // code
+}
+
+const test = (param) => {
+    // code
+}
+```
+
+## [addEventListener](https://developer.mozilla.org/ko/docs/Web/API/EventTarget/addEventListener)
+
+> addEventListener(type, listener, useCapture);
+
+options
+- `capture` [버블링과 캡처링](https://ko.javascript.info/bubbling-and-capturing)
+- `once` [이벤트리스너 한 번만 발동하게 하기](https://bingbingba.tistory.com/15)
+- `passive` [EventTarget.addEventListener()의 Passive 옵션 알아보기](https://withhsunny.tistory.com/106)
