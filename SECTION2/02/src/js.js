@@ -1,57 +1,47 @@
 (() => {
-    var target = document.querySelector('.sc_infinity .list');
-    var breakList = 10;
-    var listCount = 0;
-    var winTop;
-    var onTop;
+    const gallery = document.querySelector('.sc_infinity .list');
+
+    const imgEl = ['../images/1.jpg', '../images/2.jpg', '../images/3.jpg'];
+    let listCount = 0;
 
     function getList() {
-        var list;
-
+        let list = '';
         listCount++;
 
-        if(listCount > breakList) {
+        if(listCount > 10) {
             list = null;
         }else{
-            list = '<li><figure><img src="../images/1.jpg"></figure></li>';
-            list += '<li><figure><img src="../images/2.jpg"></figure></li>';
-            list += '<li><figure><img src="../images/3.jpg"></figure></li>';
+            imgEl.forEach(src => {
+                list += `<li><figure><img src="${src}"></figure></li>`;
+            })
         }
 
         return list;
-
     }
 
-    function listCall() {
-        winTop = window.pageYOffset;
-        onTop = document.body.offsetHeight - window.innerHeight - document.querySelector('.footer').offsetHeight;
+    const listCall = () => {
+        const winTop = window.scrollY;
+        const onTop = document.documentElement.getBoundingClientRect().height - window.innerHeight - document.querySelector('.footer').offsetHeight;
 
         if(winTop >= onTop){
+            const data = getList();
+            if(data) {
+                const el = document.createElement('div');
+                el.innerHTML += data;
 
-            var data = getList();
-
-            if(data !== null) {
-                var el = document.createElement('div');
-                el.innerHTML = data;
-
-                var node = Array.from(el.children);
-                var arr = [];
-
+                const arr = [];
                 arr.push.apply(arr, el.children);
-
                 arr.forEach(function(element) {
-                    target.appendChild(element);
+                    gallery.appendChild(element);
                 });
             }else{
                 return false;
             }
-
         }
+
     }
 
-    function init(){ //초기화
-        listCall();
-    }
+    const init = () => listCall();
 
     window.addEventListener('scroll', function() {
         listCall();
