@@ -15,15 +15,13 @@
             text-align: center
         }
 
-        .sc_infinity .list:after {
-            clear: both;
-            display: block;
-            content: ''
+        .sc_infinity .list {
+            display: flex;
+            flex-wrap: wrap;
         }
 
         .sc_infinity .list li {
-            float: left;
-            width: 25%
+            flex: 1 1 25%;
         }
 
         .sc_infinity .list li figure {
@@ -31,12 +29,10 @@
         }
 
         .footer {
-            height: 200px;
-            background-color: #ddd
-        }
-
-        .footer p {
-            padding: 50px 20px
+            padding: 100px 20px;
+            background-color: #ddd;
+            text-align: center;
+            font-size: 20px;
         }
     </style>
 </head>
@@ -63,24 +59,14 @@
                     </li>
                     <li>
                         <figure>
-                            <img src="../images/1.jpg">
-                        </figure>
-                    </li>
-                    <li>
-                        <figure>
-                            <img src="../images/2.jpg">
-                        </figure>
-                    </li>
-                    <li>
-                        <figure>
-                            <img src="../images/3.jpg">
+                            <img src="../images/4.jpg">
                         </figure>
                     </li>
                 </ul>
             </article>
-            <div class="footer">
+            <footer class="footer">
                 <p>FOOTER</p>
-            </div>
+            </footer>
         </section>
     </div>
 
