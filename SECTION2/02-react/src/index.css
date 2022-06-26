@@ -32,7 +32,7 @@ img { width: 100%; }
 }
 
 .sc_infinity .list li {
-    flex-basis: 25%;
+    flex-basis: 100%;
 }
 
 .sc_infinity .list li figure {
