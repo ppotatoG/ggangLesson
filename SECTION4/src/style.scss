@@ -1,0 +1,43 @@
+.motion_ggang {
+    position: relative;
+    width:300px;
+    img {
+        width: 100%;
+    }
+    figure {
+        position: absolute;
+        top:0;
+        left:50%;
+        margin-left:-150px;
+        width:300px;
+        font-size:0;
+    }
+    .ch_body {
+        z-index:20;
+    }
+    .ch_hand_right {
+        z-index:10;
+        transform-origin: 199px 163px;
+    }
+    .ch_hand_right {
+         animation: {
+             name: hand_move;
+             duration: .8s;
+             delay: 0s;
+             direction: alternate;
+             iteration-count: infinite;
+             play-state: running;
+             timing-function: linear;
+             fill-mode: both;
+         }
+     }
+}
+
+@keyframes hand_move {
+    0%{
+        transform:rotate(-140deg);
+    }
+    100%{
+        transform:rotate(4deg);
+    }
+}
