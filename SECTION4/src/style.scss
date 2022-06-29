@@ -1,37 +1,96 @@
-.motion_ggang {
-    position: relative;
-    width:300px;
-    img {
-        width: 100%;
-    }
-    figure {
-        position: absolute;
-        top:0;
-        left:50%;
-        margin-left:-150px;
+.motion {
+    &_ggang {
+        position: relative;
         width:300px;
-        font-size:0;
+        figure {
+            position: absolute;
+            top:0;
+            left:50%;
+            margin-left:-150px;
+            width:300px;
+            font-size:0;
+            img {
+                width: 100%;
+            }
+        }
+        .ch_body {
+            z-index:20;
+        }
+        .ch_hand_right {
+            z-index:10;
+            transform-origin: 199px 163px;
+            animation: {
+                name: hand_move;
+                duration: .8s;
+                delay: 0s;
+                direction: alternate;
+                iteration-count: infinite;
+                play-state: running;
+                timing-function: linear;
+                fill-mode: both;
+            }
+        }
     }
-    .ch_body {
+
+    &_area {
+        position:relative;
+        width:100%;
+        height:6000px;
+        background-color:#000;
+        .bg {position: absolute;
+            left:0;
+            top:0;
+            width: 100%;
+            height: 100%;
+            opacity:0;
+            transition:opacity .5s;
+            &.one {
+                background-image: url('../images/motion_sky1.gif');
+            }
+            &.two {
+                background-image:url('../images/motion_sky2.gif');
+            }
+            &.three {
+                background-image:url('../images/motion_sky3.gif');
+            }
+            &.four {
+                background-image:url('../images/motion_sky4.gif');
+            }
+            &.active {
+                opacity: 1;
+            }
+        }
+    }
+    &_rope {
+        position: fixed;
+        left:10%;
+        top:0;
         z-index:20;
+        width:20px;
+        height: 100%;
+        background-image:url('../images/motion_rope.png');
+        background-repeat: repeat-y;
+        background-position: 50% 0;
+        background-size: 20px;
     }
-    .ch_hand_right {
-        z-index:10;
-        transform-origin: 199px 163px;
+    &_moon {
+        visibility:hidden;
+        position:fixed;
+        right:100px;
+        top:100px;
+        z-index:20;
+        width:200px;
+        opacity: 0;
+        transform:translateY(-100px);
+        transition:1s;
+        &.active {
+            visibility:visible;
+            opacity:1;
+            transform:translateY(0px);
+        }
     }
-    .ch_hand_right {
-         animation: {
-             name: hand_move;
-             duration: .8s;
-             delay: 0s;
-             direction: alternate;
-             iteration-count: infinite;
-             play-state: running;
-             timing-function: linear;
-             fill-mode: both;
-         }
-     }
 }
+
 
 @keyframes hand_move {
     0%{
