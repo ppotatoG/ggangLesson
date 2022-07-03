@@ -1,7 +1,16 @@
 .motion {
     &_ggang {
-        position: relative;
+        position: fixed;
+        left:10%;
+        top:100px;
+        z-index:30;
         width:300px;
+        will-change: transform;
+
+        img {
+            width: 100%;
+        }
+
         figure {
             position: absolute;
             top:0;
@@ -9,35 +18,36 @@
             margin-left:-150px;
             width:300px;
             font-size:0;
-            img {
-                width: 100%;
+        }
+
+        .ch {
+            &_body {
+                z-index:20;
             }
-        }
-        .ch_body {
-            z-index:20;
-        }
-        .ch_hand_right {
-            z-index:10;
-            transform-origin: 199px 163px;
-            animation: {
-                name: hand_move;
-                duration: .8s;
-                delay: 0s;
-                direction: alternate;
-                iteration-count: infinite;
-                play-state: running;
-                timing-function: linear;
-                fill-mode: both;
+
+            &_hand_right {
+                z-index: 10;
+                transform-origin: 199px 163px;
+                animation: {
+                    name: hand_move;
+                    duration: .8s;
+                    delay: 0s;
+                    direction: alternate;
+                    iteration-count: infinite;
+                    play-state: running;
+                    timing-function: linear;
+                    fill-mode: both;
+                }
             }
         }
     }
-
     &_area {
         position:relative;
         width:100%;
         height:6000px;
         background-color:#000;
-        .bg {position: absolute;
+        .bg {
+            position: absolute;
             left:0;
             top:0;
             width: 100%;
@@ -45,7 +55,7 @@
             opacity:0;
             transition:opacity .5s;
             &.one {
-                background-image: url('../images/motion_sky1.gif');
+                background-image:url('../images/motion_sky1.gif');
             }
             &.two {
                 background-image:url('../images/motion_sky2.gif');
@@ -91,12 +101,26 @@
     }
 }
 
-
 @keyframes hand_move {
     0%{
-        transform:rotate(-140deg);
+        transform:rotate(-14deg);
     }
     100%{
         transform:rotate(4deg);
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .motion_area {
+        .bg {
+            background-size: 400px;
+        }
+        .motion_moon {
+            right:20px;
+            width:100px;
+        }
+    }
+    .motion_ggang {
+        top:calc(100vh - 473px);
     }
 }

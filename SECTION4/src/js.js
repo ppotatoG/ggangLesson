@@ -1,10 +1,10 @@
-$(function(){
-    var scrollBody = $('.motion_area');
-    var parallaxDistance = 210;
+window.onload = function() {
 
-    var bgContent = scrollBody.find('.bg');
-    var ggangBody = scrollBody.find('.motion_ggang');
-    var moonBody = scrollBody.find('.motion_moon');
+    var scrollBody = document.querySelector('.motion_area');
+    var parallaxDistance = 110;
+    var bgContent = scrollBody.querySelectorAll('.bg');
+    var ggangBody = scrollBody.querySelector('.motion_ggang');
+    var moonBody = scrollBody.querySelector('.motion_moon');
 
     var scrollHeight;
     var scrollRealHeight;
@@ -13,58 +13,64 @@ $(function(){
     var moveDistance;
 
     function setProperty() {
-        scrollHeight = scrollBody.height();
-        scrollRealHeight = (scrollHeight - $(window).height());
-        winScrollTop = $(window).scrollTop();
+
+        scrollHeight = scrollBody.offsetHeight;
+        scrollRealHeight = (scrollHeight - window.innerHeight);
+        winScrollTop = window.pageYOffset;
         var scrollPerecnt = winScrollTop / scrollRealHeight;
         percent = scrollPerecnt * 100;
         moveDistance = scrollPerecnt * parallaxDistance;
+
     };
 
-    function motionGgang() {
+    function motionGgang(){
+
         setProperty();
         changeBackgound();
         parallaxMove();
+
     };
 
-    function changeBackgound() {//
+    function changeBackgound() {
         if(percent < 25){
             setBackground(0);
         }else if(percent >= 25 && percent < 50){
             setBackground(1);
         }else if(percent >= 50 && percent < 75){
             setBackground(2);
-            moonBody.removeClass('active');
+            moonBody.classList.remove('active');
         }else if(percent >= 75 && percent < 100){
             setBackground(3);
-            moonBody.addClass('active');
+            moonBody.classList.add('active');
 
         }
     };
 
     function setBackground(index) {
-        bgContent.removeClass('active');
-        bgContent.eq(index).addClass('active');
+        bgContent.forEach(function(el) {
+            el.classList.remove('active');
+        });
+
+        bgContent[index].classList.add('active');
     };
 
     function parallaxMove() {
-        ggangBody.css({
-            transform : 'translate(0px,'+ moveDistance +'px)'
-        });
+        ggangBody.style.transform = 'translate(0px,'+ moveDistance +'px)';
     };
 
     function init() {
         motionGgang();
     };
 
-    $(window).scroll(function(e) {
+    window.addEventListener('scroll', function() {
         motionGgang();
-    });
+    }, false);
 
-    $(window).resize(function(e) {
+    window.addEventListener('resize', function() {
         motionGgang();
-    });
+    }, false);
 
     init();
 
-});
+
+};

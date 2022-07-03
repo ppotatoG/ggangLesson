@@ -1,6 +1,12 @@
 .motion_ggang {
-  position: relative;
-  width: 300px; }
+  position: fixed;
+  left: 10%;
+  top: 100px;
+  z-index: 30;
+  width: 300px;
+  will-change: transform; }
+  .motion_ggang img {
+    width: 100%; }
   .motion_ggang figure {
     position: absolute;
     top: 0;
@@ -8,8 +14,6 @@
     margin-left: -150px;
     width: 300px;
     font-size: 0; }
-    .motion_ggang figure img {
-      width: 100%; }
   .motion_ggang .ch_body {
     z-index: 20; }
   .motion_ggang .ch_hand_right {
@@ -74,8 +78,17 @@
 
 @keyframes hand_move {
   0% {
-    transform: rotate(-140deg); }
+    transform: rotate(-14deg); }
   100% {
     transform: rotate(4deg); } }
+@media only screen and (max-width: 767px) {
+  .motion_area .bg {
+    background-size: 400px; }
+  .motion_area .motion_moon {
+    right: 20px;
+    width: 100px; }
+
+  .motion_ggang {
+    top: calc(100vh - 473px); } }
 
 /*# sourceMappingURL=style.css.map */
