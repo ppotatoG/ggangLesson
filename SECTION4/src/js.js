@@ -61,6 +61,10 @@ $(function(){
         motionGgang();
     });
 
+    $(window).resize(function(e) {
+        motionGgang();
+    });
+
     init();
 
 });
