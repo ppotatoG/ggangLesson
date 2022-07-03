@@ -1,37 +1,32 @@
-window.onload = function() {
+(() => {
+    const scrollBody = document.querySelector('.motion_area');
+    const parallaxDistance = 110;
+    const bgContent = scrollBody.querySelectorAll('.bg');
+    const ggangBody = scrollBody.querySelector('.motion_ggang');
+    const moonBody = scrollBody.querySelector('.motion_moon');
 
-    var scrollBody = document.querySelector('.motion_area');
-    var parallaxDistance = 110;
-    var bgContent = scrollBody.querySelectorAll('.bg');
-    var ggangBody = scrollBody.querySelector('.motion_ggang');
-    var moonBody = scrollBody.querySelector('.motion_moon');
+    let scrollHeight;
+    let scrollRealHeight;
+    let winScrollTop;
+    let percent;
+    let moveDistance;
 
-    var scrollHeight;
-    var scrollRealHeight;
-    var winScrollTop;
-    var percent;
-    var moveDistance;
-
-    function setProperty() {
-
+    const setProperty = () => {
+        const scrollPercent = winScrollTop / scrollRealHeight;
         scrollHeight = scrollBody.offsetHeight;
         scrollRealHeight = (scrollHeight - window.innerHeight);
-        winScrollTop = window.pageYOffset;
-        var scrollPerecnt = winScrollTop / scrollRealHeight;
-        percent = scrollPerecnt * 100;
-        moveDistance = scrollPerecnt * parallaxDistance;
+        winScrollTop = window.scrollY;
+        percent = scrollPercent * 100;
+        moveDistance = scrollPercent * parallaxDistance;
+    }
 
-    };
-
-    function motionGgang(){
-
+    const motionGgang = () => {
         setProperty();
-        changeBackgound();
+        changeBackground();
         parallaxMove();
+    }
 
-    };
-
-    function changeBackgound() {
+    const changeBackground = () => {
         if(percent < 25){
             setBackground(0);
         }else if(percent >= 25 && percent < 50){
@@ -42,35 +37,32 @@ window.onload = function() {
         }else if(percent >= 75 && percent < 100){
             setBackground(3);
             moonBody.classList.add('active');
-
         }
-    };
+    }
 
-    function setBackground(index) {
-        bgContent.forEach(function(el) {
+    const setBackground = (index) => {
+        bgContent.forEach(el => {
             el.classList.remove('active');
         });
 
         bgContent[index].classList.add('active');
-    };
+    }
 
-    function parallaxMove() {
+    const parallaxMove = () => {
         ggangBody.style.transform = 'translate(0px,'+ moveDistance +'px)';
-    };
+    }
 
-    function init() {
+    const init = () => {
         motionGgang();
-    };
+    }
 
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', () => {
         motionGgang();
     }, false);
 
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', () => {
         motionGgang();
     }, false);
 
     init();
-
-
-};
+})();
