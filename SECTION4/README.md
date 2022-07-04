@@ -31,3 +31,34 @@
     }
 }
 ```
+
+## onload function 
+
+[document.ready, window.ready, window.onload 실행순서](https://blog.devari.kr/2017/publishing/ready-document-window-onload)
+
+```js
+window.addEventListener('load', () => {
+    console.log('load')
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded');
+});
+
+window.onload = () => {
+    console.log('window.onload')
+};
+
+(() => {
+    console.log('arrow')
+    window.addEventListener('scroll', () => {
+        setGgang(window.scrollY);
+    });
+})();
+
+
+// arrow
+// DOMContentLoaded
+// load
+// window.onload
+```
