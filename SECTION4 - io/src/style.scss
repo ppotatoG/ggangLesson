@@ -1,0 +1,113 @@
+.wrap {
+    .io_wrap {
+        width: 100%;
+        height: fit-content;
+        transition: background-color .5s;
+        background: {
+            size: contain;
+            image: url('../images/cloud.png');
+            color: #a2dfff;
+            attachment: fixed;
+        };
+
+        [class^=cont] {
+            min-height: 2000px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-size: 6vw;
+            text-align: right;
+            padding: 50% 2%;
+            text-shadow: 0 0 8px #00324c;
+            color: #fff;
+            box-sizing: border-box;
+            &.cont04 {
+                color: #fff;
+                &.active {
+                    & ~ .motion_moon {
+                        visibility:visible;
+                        opacity:1;
+                        transform:translateY(0px);
+                    }
+                }
+            }
+        }
+    }
+}  
+
+.motion {
+    &_ggang {
+        position: fixed;
+        left:10%;
+        top:calc(100vh - 473px);
+        z-index:30;
+        width:300px;
+        will-change: transform;
+
+        img {
+            width: 100%;
+        }
+
+        figure {
+            position: absolute;
+            top:0;
+            left:50%;
+            margin-left:-150px;
+            width:300px;
+            font-size:0;
+        }
+
+        .ch {
+            &_body {
+                z-index:20;
+            }
+
+            &_hand_right {
+                z-index: 10;
+                transform-origin: 199px 163px;
+                animation: {
+                    name: hand_move;
+                    duration: .8s;
+                    delay: 0s;
+                    direction: alternate;
+                    iteration-count: infinite;
+                    play-state: running;
+                    timing-function: linear;
+                    fill-mode: both;
+                }
+            }
+        }
+    }
+    &_rope {
+        position: fixed;
+        left:10%;
+        top:0;
+        z-index:20;
+        width:20px;
+        height: 100%;
+        background-image:url('../images/motion_rope.png');
+        background-repeat: repeat-y;
+        background-position: 50% 0;
+        background-size: 20px;
+    }
+    &_moon {
+        visibility:hidden;
+        position:fixed;
+        right:100px;
+        top:100px;
+        z-index:20;
+        width:200px;
+        opacity: 0;
+        transform:translateY(-100px);
+        transition:1s;
+    }
+}
+
+@keyframes hand_move {
+    0%{
+        transform:rotate(-14deg);
+    }
+    100%{
+        transform:rotate(4deg);
+    }
+}
