@@ -27,12 +27,22 @@
   width: 100%;
   height: 70px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background .5s;
 
   .logo {
     margin-top: 15px;
     padding-left: 20px;
     font-size: 24px;
     color: #fff;
+  }
+
+  &.active {
+    background: rgba(255, 255, 255, 0.5);
+
+    .logo {
+      color: #222;
+      transition: color .5s;
+    }
   }
 }
 
@@ -64,6 +74,8 @@
   }
 }
 
+/* main */
+
 .nav_list {
   position: fixed;
   left: 20px;
@@ -81,8 +93,7 @@
       transition: .3s;
     }
 
-    &:nth-child(2) button,
-    &:nth-child(3) button {
+    &:nth-child(2) button, &:nth-child(3) button {
       -webkit-text-fill-color: transparent;
       -webkit-text-stroke: 2px #f1f1f1;
     }
@@ -180,6 +191,7 @@
         .img_box {
           opacity: 0;
           transform: translateY(50px);
+          transition: opacity .5s, transform .5s;
         }
       }
     }
