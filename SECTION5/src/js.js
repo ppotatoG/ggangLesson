@@ -4,7 +4,7 @@ $(function(){
     var header = $('.header_wrap');
     var sectionMainVisual = $('.sec_mainvis');
     var sectionOverlap = $('.sec_list_overlap');
-    var sectionMainTop; //섹션의 top값을 ㅁ.
+    var sectionMainTop; //섹션의 top값을 구함.
     var sectionMainBottom; //섹션의 BOTTOM값을 구함.
 
     var parallaxBody = $('.sec_list_overlap'); //패럴럭스가 시작될 엘리먼트 지정
@@ -20,6 +20,8 @@ $(function(){
     var parallaxPercent; // 패럴럭스 백분율값을 담을 변수를 선업합니다
     var parallaxStartValue = 1000; //패럴럭스요소가 200 위치에서 시작하도록 설정합니다.
     var parallaxMoveDistance; // 패럴럭스 요소가 움직일 거리를 담을 변수 선업합니다
+    var isMac = navigator.platform.indexOf('Mac') >= 0;
+    var isEdge = /Edg/.test(navigator.userAgent);
 
     function setProperty(){ //스크롤 할 때 변할 값들을 세팅하는 함수
 
@@ -33,11 +35,11 @@ $(function(){
         parallaxMoveDistance = Math.max(parallaxStartValue - parallaxStartValue, Math.min(parallaxStartValue, parallaxStartValue - (parallaxStartValue * (parallaxPercent/100)))); //패럴럭스 요소가 움직일 거리를 구함
     };
 
-    function motionParallax() { // 스크롤할때 계속 호출될 패럴럭스 함수 선언
+    function motionParallax() { // 스크롤 할 때 계속 호출될 패럴럭스 함수 선언
 
         if(parallaxPercent > 60) {
             $('.sec_parallax').addClass('active');
-        }else {
+        } else {
             $('.sec_parallax').removeClass('active');
         }
 
@@ -78,16 +80,22 @@ $(function(){
         });
     };
 
-    function moveSection() { //스크롤 할 때 호출함
+    function moveSection(delta) { //스크롤 할 때 호출함
+
+        var deltaY = delta || null;
 
         setProperty(); //스크롤 할 때 변해야 할 값들의 변수를 선언한 함수
         motionParallax(); //패럴럭스 처리 함수
 
-        if(winScrollTop > sectionMainTop && winScrollTop < sectionMainBottom) { //섹션에 진입했는지 체크합니다.
+        if(deltaY && isMac && winScrollTop >= sectionMainTop && winScrollTop < sectionMainBottom ||
+            deltaY && !isMac && winScrollTop > sectionMainTop && winScrollTop < sectionMainBottom
+        ) {
 
             if(!sectionIsMoving) { //애니메이션이 진행 중인지 체크합니다.
-                sectionIsMoving = true;
-                moveStartRender(); //섹션 이동을 처리하는 함수
+                if(!isEdge) {
+                    sectionIsMoving = true;
+                }
+                moveStartRender(deltaY); //섹션 이동을 처리하는 함수
             }
         }
 
@@ -103,30 +111,35 @@ $(function(){
         sectionOverlap.addClass('active');
     };
 
-    function moveStartRender() { //섹션 이동 처리 함수
+    function moveStartRender(deltaY) { //섹션 이동 처리 함수
 
-        if(!header.hasClass('active')) { //해더 클래스가 없을 경우에는 아래로 내려오는 상황
+        if(deltaY > 0) { //해더 클래스가 없을 경우에는 아래로 내려오는 상황
 
             header.addClass('active');
             sectionMainVisual.addClass('active');
             sectionOverlap.addClass('active');
 
-            $('html').stop(true).animate({
-                scrollTop: sectionMainBottom+1 //IE버그 반복 버그 처리를 위해 1을 추가.
-            },500,function(){
-                sectionIsMoving = false; //섹션이 이동 중인지 체크하는 변수
-            });
+            if(!isEdge) {
+                $('html').stop(true).animate({
+                    scrollTop: sectionMainBottom+1 //IE버그 반복 버그 처리를 위해 1을 추가.
+                },500,function(){
+                    sectionIsMoving = false; //섹션이 이동 중인지 체크하는 변수
+                });
+            }
+
         } else { //해더 클래스가 있을 경우 위로 올라가는 상황
 
             header.removeClass('active');
             sectionMainVisual.removeClass('active');
             sectionOverlap.removeClass('active');
 
-            $('html').stop(true).animate({
-                scrollTop: sectionMainTop
-            },500,function(){
-                sectionIsMoving = false; //섹션이 이동 중인지 체크하는 변수
-            });
+            if(!isEdge) {
+                $('html').stop(true).animate({
+                    scrollTop: sectionMainTop
+                },500,function(){
+                    sectionIsMoving = false; //섹션이 이동 중인지 체크하는 변수
+                });
+            }
         }
     };
 
@@ -135,10 +148,32 @@ $(function(){
         moveSection();
     };
 
-    $(window).scroll(function(e) { //스크롤 이벤트를 추가합니다.
+    if(isMac) { //맥일경우
+        window.addEventListener('wheel',function(e) {
 
-        moveSection(); // 스크롤 이동처리 함수입니다
-    });
+            if(winScrollTop >= sectionMainTop && winScrollTop < sectionMainBottom) {
+                e.preventDefault();
+            }
+
+            var delta = e.deltaY;
+            moveSection(delta);
+
+        }, {passive: false});
+    } else { //맥이 아닐 경우
+        var beforeScroll = -1;
+        $(window).scroll(function(){
+
+            var delta = 0;
+            if(beforeScroll > $(window).scrollTop()) {
+                delta = -1
+            }else {
+                delta = 1
+            }
+
+            moveSection(delta);
+            beforeScroll = $(window).scrollTop();
+        });
+    }
 
     init(); //초기화
 });
