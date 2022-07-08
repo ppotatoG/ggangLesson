@@ -74,8 +74,6 @@
   }
 }
 
-/* main */
-
 .nav_list {
   position: fixed;
   left: 20px;
@@ -190,7 +188,7 @@
 
         .img_box {
           opacity: 0;
-          transform: translateY(50px);
+          transform: translateY(20px);
           transition: opacity .5s, transform .5s;
         }
       }
