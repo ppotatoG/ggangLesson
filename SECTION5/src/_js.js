@@ -2,7 +2,35 @@
 
 })();
 
-const winHeight = window.innerHeight;
+let sectionIsMoving = true;
+
+const fullPages = (winHeight) => {
+
+    const secMainVis = document.querySelector('.sec_mainvis');
+    const secOverlap = document.querySelector('.sec_list_overlap');
+
+    if(
+        sectionIsMoving
+        && secOverlap.getBoundingClientRect().bottom >= 0
+    ) {
+
+        const secMainVisTop = secMainVis.getBoundingClientRect().top;
+        const secOverlapTop = secOverlap.getBoundingClientRect().top;
+
+        console.log(window.scrollY)
+
+        if (window.scrollY === 970) {
+            sectionIsMoving = false;
+        }
+        // else {
+
+            // return secOverlap;
+        // }
+
+        sectionIsMoving = true;
+        console.log('end')
+    }
+}
 
 const motionParallax = (winHeight) => {
     const parallaxList = document.querySelectorAll('.sec_parallax .img_box');
@@ -30,6 +58,12 @@ const motionParallax = (winHeight) => {
     bgLine.style.transform = `translate(0px, -${(100 - parallaxPercent) * 3}px)`;
 };
 
+const winHeight = window.innerHeight;
+
 window.addEventListener('scroll', (e) => {
     motionParallax(winHeight);
+})
+
+window.addEventListener('scrollDown', () => {
+    if(sectionIsMoving) fullPages(winHeight);
 })
