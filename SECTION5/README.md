@@ -66,3 +66,5 @@ let arr = [1, 2, 4, 5, 6];
 arr.find(a => a === 5);
 // 3
 ```
+
+## [falg 변수](https://deseul.tistory.com/14)
