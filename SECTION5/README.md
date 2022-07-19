@@ -1,3 +1,5 @@
+#  스크롤에 반응하는 다중 패럴럭스와 섹션이동 인터렉션
+
 ## var deltaY = delta || null;
 
 함수 `moveSection` 사용 시 인자값 `deltaY`이 있으면 사용,

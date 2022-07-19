@@ -3,34 +3,51 @@
 })();
 
 let sectionIsMoving = true;
+let test = 0;
+const secMainVis = document.querySelector('.sec_mainvis');
+const secOverlap = document.querySelector('.sec_list_overlap');
 
-const fullPages = (winHeight) => {
-
-    const secMainVis = document.querySelector('.sec_mainvis');
-    const secOverlap = document.querySelector('.sec_list_overlap');
-
+const fullPages = () => {
     if(
         sectionIsMoving
-        && secOverlap.getBoundingClientRect().bottom >= 0
+        && 
+        secOverlap.getBoundingClientRect().y >= 0
     ) {
-
-        const secMainVisTop = secMainVis.getBoundingClientRect().top;
-        const secOverlapTop = secOverlap.getBoundingClientRect().top;
-
-        console.log(window.scrollY)
-
-        if (window.scrollY === 970) {
+        if (test > window.scrollY) {
+            scrollMove(secMainVis)
             sectionIsMoving = false;
         }
         // else {
-
-            // return secOverlap;
+        //     console.log('down')
+        //     scrollMove(secOverlap)
         // }
 
-        sectionIsMoving = true;
-        console.log('end')
+        test = window.scrollY;
     }
 }
+
+const scrollMove = (el) => {
+    let curPoint = window.scrollY;
+    const loop = setInterval(() => {
+        console.log('setInterval')
+        if(curPoint <= 0) {
+            clearInterval(loop);
+            sectionIsMoving = true;
+        }
+        
+        else {
+            console.log(curPoint)
+            curPoint -= 300;
+            console.log(curPoint)
+
+            window.scrollTo({
+                top: curPoint, 
+                left: 0, 
+                behavior: 'smooth'
+            });
+        }
+    }, 10);
+} 
 
 const motionParallax = (winHeight) => {
     const parallaxList = document.querySelectorAll('.sec_parallax .img_box');
@@ -60,10 +77,7 @@ const motionParallax = (winHeight) => {
 
 const winHeight = window.innerHeight;
 
-window.addEventListener('scroll', (e) => {
+window.addEventListener('scroll', () => {
     motionParallax(winHeight);
-})
-
-window.addEventListener('scrollDown', () => {
-    if(sectionIsMoving) fullPages(winHeight);
-})
+    fullPages(winHeight);
+});
