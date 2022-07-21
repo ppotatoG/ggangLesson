@@ -1,0 +1,92 @@
+@charset "UTF-8";
+.wrap {
+  overflow: hidden; }
+
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height: 70px;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: rgba(255, 255, 255, 0.2); }
+  .header__logo {
+    font-size: 24px;
+    color: #fff; }
+
+.section {
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+  background: #000;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .section .toady {
+    position: absolute;
+    left: 20px;
+    top: 400px;
+    z-index: 100;
+    font-size: 300px;
+    color: #fff;
+    opacity: .1;
+    transform: translateX(-100%);
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px #fff;
+    transition: transform 1s; }
+  .section .date-count {
+    overflow: hidden;
+    height: 200px;
+    opacity: 0;
+    transition: opacity .5s 1s; }
+    .section .date-count__item {
+      height: 200px;
+      color: #fff;
+      font-size: 200px;
+      line-height: 1;
+      text-align: center;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 6px #fff;
+      float: left;
+      animation: count_date 2.8s 1 ease-out both paused; }
+      .section .date-count__item p {
+        display: block;
+        height: 200px;
+        color: #fff;
+        font-size: 200px;
+        line-height: 1;
+        text-align: center;
+        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: 6px #fff; }
+      .section .date-count__item.active {
+        animation-play-state: running; }
+  .section.active .toady {
+    transform: translateX(0%); }
+  .section.active .date-count {
+    opacity: 1; }
+
+@keyframes count_date {
+  0% {
+    transform: translateY(0px); }
+  100% {
+    transform: translateY(-4800px);
+    /* 높이 x 롤링될 개수로 구한값 */ } }
+.footer {
+  position: relative;
+  height: 300px;
+  background: #111;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 50px; }
+  .footer__text {
+    color: #fff;
+    font-size: 34px; }
+
+/*# sourceMappingURL=style.css.map */
