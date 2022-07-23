@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../library/css/common.css">
+    <link rel="stylesheet" href="./src/style.css">
+
+    <script type="text/javascript" src="../../library/js/jquery.1.12.4.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <header class="header">
+        <p class="header__logo">GGANG CODING</p>
+    </header>
+    <section class="section">
+        <article class="product__mask">
+            <div class="product__mask__title_wrap">
+                <h2>IMAGE MASK</h2>
+                <p>숨어있다가 나오는 느낌의 이미지 마스크 기법</p>
+            </div>
+            <ul class="product__mask__list">
+                <li class="product__mask__item">
+                    <figure>
+                        <img src="../images/1.jpg" alt="../images/1.jpg">
+                    </figure>
+                </li>
+                <li class="product__mask__item">
+                    <figure>
+                        <img src="../images/2.jpg" alt="../images/2.jpg">
+                    </figure>
+                </li>
+                <li class="product__mask__item">
+                    <figure>
+                        <img src="../images/3.jpg" alt="../images/3.jpg">
+                    </figure>
+                </li>
+                <li class="product__mask__item">
+                    <figure>
+                        <img src="../images/4.jpg" alt="../images/4.jpg">
+                    </figure>
+                </li>
+            </ul>
+        </article>
+
+        <article class="product__pattern">
+            <div class="product__pattern__text_wrap">
+                <h3>텍스트와 이미지 패턴</h3>
+                <p>
+                    왼쪽은 텍스트 오른쪽은 이미지! :) CSS를 활용해 모션을 만들고 스크롤위치에 도착 했을때
+                    등장하는 인터렉션을 구현해보세요. 공부가 목적이 아니라도 재밌는 수업이 될거라 믿습니다 :)
+                </p>
+            </div>
+            <div class="product__pattern__img_wrap">
+                <figure>
+                    <img src="../images/6.jpg" alt="../images/6.jpg">
+                </figure>
+            </div>
+        </article>
+    </section>
+    <footer class="footer">
+        <p class="footer__text">
+            2020 GGANG CODING. 당신의 열정을 응원합니다. :)
+        </p>
+    </footer>
+</div>
+<script>
+    (() => {
+        const productMask = document.querySelector('.product__mask');
+        const productPattern = document.querySelector('.product__pattern');
+
+        setTimeout(() => {
+            productMask.classList.add('active')
+            productPattern.classList.add('active')
+        }, 200)
+    })()
+</script>
+</body>
+</html>
