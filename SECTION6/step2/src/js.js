@@ -1,35 +1,33 @@
 const countDate = () => {
     const el = document.querySelector('.date-count');
+
     const date = new Date();
     const todayDate = `${date.getFullYear()}${date.getMonth() + 1}${date.getDate()}`;
-    const rolling = 24;
     const resultArray = todayDate.split('');
-    const numberArray = Array.from({length : 100}, (val, idx) => (idx + 1) % 10);
+
+    const rolling = 24;
 
     resultArray.forEach((val, idx) => {
-        const conuntBox = document.createElement('div');
-        conuntBox.className = 'date-count__item';
+        const countBox = document.createElement('div');
+        countBox.className = 'date-count__item';
 
-        const curNumber = val - 1 <= 0 ? Number(val += 9) : Number(val - 1);
-        const number = [...numberArray].splice(curNumber, curNumber + rolling);
+        const number = Array.from({length: rolling + 1}, (v, i) => {
+            const value = Number(val) + i;
+            return value >= 10 ? value % 10 : value;
+        }).reverse();
 
-        if(idx === 1) {
-            console.log(number)
-            console.log(curNumber)
-            console.log(curNumber + rolling)
-        }
 
         number.forEach(number => {
             const countValue = document.createElement('p');
-            countValue.innerText = number;
+            countValue.innerText = `${number}`;
 
-            conuntBox.appendChild(countValue);
+            countBox.appendChild(countValue);
         });
 
-        el.appendChild(conuntBox);
+        el.appendChild(countBox);
 
         setTimeout(function() {
-            conuntBox.classList.add('active');
+            countBox.classList.add('active');
         }, idx * 300);
     });
 };
