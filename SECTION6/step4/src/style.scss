@@ -1,0 +1,114 @@
+.wrap {
+    overflow: hidden;
+}
+
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 70px;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    border-bottom: {
+        width: 1px;
+        style: solid;
+        color: rgba(255, 255, 255, 0.2);
+    }
+
+    &__logo {
+        font-size: 24px;
+        color: #fff;
+    }
+}
+
+.section_textmask {
+    overflow: hidden;
+    padding: 160px 0;
+    background: #000;
+    text-align: center;
+    color: #fff;
+
+    .tit_wrap {
+        h2 {
+            font: {
+                size: 60px;
+                weight: 600;
+            }
+        }
+        p {
+            font-size: 24px;
+        }
+    }
+
+    .motion {
+        margin-top: 50px;
+        &__item {
+            background-image: linear-gradient(to right, white 0 50%, #00b8ff 50% 100%);
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            &:nth-of-type(2) {
+                background-image: linear-gradient(to left, white 0 50%, #00b8ff 50% 100%);
+                .motion__text {
+                    animation-delay: .3s;
+                }
+            }
+            &:nth-of-type(3) {
+                .motion__text {
+                    animation-delay: .6s;
+                }
+            }
+        }
+
+        &__text {
+            font-size: 130px;
+            line-height: 1;
+            width: 100vw;
+            min-width: 100vw;
+            animation: {
+                name: move_text_mask;
+                duration: 2.2s;
+                iteration-count: 1;
+                timing-function: ease-in-out;
+                fill-mode: both;
+                play-state: paused;
+            }
+        }
+
+        &.active {
+            .motion__text {
+                animation-play-state: running;
+            }
+        }
+    }
+}
+
+@keyframes move_text_mask {
+    0% {
+        margin-left: -25vw;
+    }
+
+    50% {
+        margin-left: 25vw;
+    }
+
+    100% {
+        margin-left: 0;
+    }
+}
+
+.footer {
+    position: relative;
+    height: 300px;
+    background: #111;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 50px;
+
+    &__text {
+        color: #fff;
+        font-size: 34px;
+    }
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../library/css/common.css">
+    <link rel="stylesheet" href="./src/style.css">
+
+    <script type="text/javascript" src="../../library/js/jquery.1.12.4.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <header class="header">
+        <p class="header__logo">GGANG CODING</p>
+    </header>
+    <section class="section_textmask">
+        <div class="tit_wrap">
+            <h2>TEXT OVERLAP</h2>
+            <p>텍스트로 구현하는 엣지 있는 모션 :)</p>
+        </div>
+
+        <div class="motion">
+            <div class="motion__item">
+                <p class="motion__text">모션 만들기!</p>
+            </div>
+            <div class="motion__item">
+                <p class="motion__text">수강생 화이팅!</p>
+            </div>
+            <div class="motion__item">
+                <p class="motion__text">신난다 재미난다!</p>
+            </div>
+        </div>
+
+    </section>
+    <footer class="footer">
+        <p class="footer__text">
+            2020 GGANG CODING. 당신의 열정을 응원합니다. :)
+        </p>
+    </footer>
+</div>
+<script>
+    (() => {
+        const motion = document.querySelector('.motion');
+
+        setTimeout(() => {
+            motion.classList.add('active')
+        }, 200)
+    })()
+</script>
+</body>
+</html>
