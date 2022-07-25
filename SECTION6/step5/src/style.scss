@@ -1,0 +1,115 @@
+.wrap {
+    overflow: hidden;
+}
+
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 70px;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    border-bottom: {
+        width: 1px;
+        style: solid;
+        color: rgba(255, 255, 255, 0.2);
+    }
+
+    &__logo {
+        font-size: 24px;
+        color: #fff;
+    }
+}
+
+.section_overlap {
+    overflow: hidden;
+    padding: 100px 0;
+    background: #000;
+    text-align: center;
+    color: #fff;
+
+    .tit_wrap {
+        margin-bottom: 50px;
+        z-index: 5;
+        position: sticky;
+
+        h2 {
+            font: {
+                size: 60px;
+                weight: 600;
+            }
+        }
+        p {
+            font-size: 24px;
+        }
+    }
+
+    .device {
+        width: 300px;
+        margin: 0 auto;
+        z-index: 5;
+        position: sticky;
+        img {
+            width: 100%;
+        }
+    }
+
+    .bg_change {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+
+        &.color01 {
+            z-index: 4;
+            background-color: #000;
+            transition: width .5s .2s;
+        }
+
+        &.color02 {
+            z-index: 3;
+            background-color: #272727;
+            transition: width .5s .7s;
+        }
+
+        &.color03 {
+            z-index: 2;
+            background-color: #c2bada;
+            transition: width .5s 1.2s;
+        }
+
+        &.color04 {
+            z-index: 1;
+            background-color: #000;
+        }
+    }
+
+    &.active .color01 {
+        width: 0;
+    }
+
+    &.active .color02 {
+        width: 0;
+    }
+    &.active .color03 {
+        width: 0;
+    }
+}
+
+.footer {
+    position: relative;
+    height: 300px;
+    background: #111;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 50px;
+
+    &__text {
+        color: #fff;
+        font-size: 34px;
+    }
+}
