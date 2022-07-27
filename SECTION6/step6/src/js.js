@@ -1,3 +1,5 @@
+let countDateFlag = true;
+
 const countDate = () => {
     const el = document.querySelector('.date-count');
 
@@ -16,7 +18,6 @@ const countDate = () => {
             return value >= 10 ? value % 10 : value;
         }).reverse();
 
-
         number.forEach(number => {
             const countValue = document.createElement('p');
             countValue.innerText = `${number}`;
@@ -30,6 +31,8 @@ const countDate = () => {
             countBox.classList.add('active');
         }, idx * 300);
     });
+
+    countDateFlag = false;
 };
 
 const scrollObserver = () => {
@@ -39,7 +42,12 @@ const scrollObserver = () => {
         entries.forEach (entry => {
             if(entry.isIntersecting) {
                 entry.target.classList.add('active')
-                if (/today/.test(entry.target.classList.value)) countDate();
+                if (
+                    /today/.test(entry.target.classList.value)
+                    && countDateFlag
+                ) {
+                    countDate();
+                }
             }
         })
     }, {
