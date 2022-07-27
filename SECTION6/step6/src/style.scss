@@ -133,6 +133,14 @@
     }
 
     &__today {
+        overflow: hidden;
+        height: 100vh;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
         .toady {
             position: absolute;
             left: 20px;
@@ -205,8 +213,6 @@
     }
 }
 
-//section
-
 @keyframes text_mask {
     0% {
         width: 0;
@@ -245,5 +251,14 @@
 
     100% {
         transform: rotate(360deg);
+    }
+}
+
+@keyframes count_date {
+    0%{
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-4800px);
     }
 }

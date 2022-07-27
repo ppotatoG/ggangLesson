@@ -101,48 +101,56 @@
     .article__rotate.active .nav__mask-bg,
     .article__rotate.active .gear_wheel {
       animation-play-state: running; }
-  .article__today .toady {
-    position: absolute;
-    left: 20px;
-    top: 400px;
-    z-index: 100;
-    font-size: 300px;
-    color: #fff;
-    opacity: .1;
-    transform: translateX(-100%);
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 2px #fff;
-    transition: transform 1s; }
-  .article__today .date-count {
+  .article__today {
     overflow: hidden;
-    height: 200px;
-    opacity: 0;
-    transition: opacity .5s 1s; }
-    .article__today .date-count__item {
-      height: 200px;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    .article__today .toady {
+      position: absolute;
+      left: 20px;
+      top: 400px;
+      z-index: 100;
+      font-size: 300px;
       color: #fff;
-      font-size: 200px;
-      line-height: 1;
-      text-align: center;
+      opacity: .1;
+      transform: translateX(-100%);
       -webkit-text-fill-color: transparent;
-      -webkit-text-stroke: 6px #fff;
-      float: left;
-      animation: count_date 2.8s 1 ease-out both paused; }
-      .article__today .date-count__item p {
-        display: block;
+      -webkit-text-stroke: 2px #fff;
+      transition: transform 1s; }
+    .article__today .date-count {
+      overflow: hidden;
+      height: 200px;
+      opacity: 0;
+      transition: opacity .5s 1s; }
+      .article__today .date-count__item {
         height: 200px;
         color: #fff;
         font-size: 200px;
         line-height: 1;
         text-align: center;
         -webkit-text-fill-color: transparent;
-        -webkit-text-stroke: 6px #fff; }
-      .article__today .date-count__item.active {
-        animation-play-state: running; }
-  .article__today.active .toady {
-    transform: translateX(0%); }
-  .article__today.active .date-count {
-    opacity: 1; }
+        -webkit-text-stroke: 6px #fff;
+        float: left;
+        animation: count_date 2.8s 1 ease-out both paused; }
+        .article__today .date-count__item p {
+          display: block;
+          height: 200px;
+          color: #fff;
+          font-size: 200px;
+          line-height: 1;
+          text-align: center;
+          -webkit-text-fill-color: transparent;
+          -webkit-text-stroke: 6px #fff; }
+        .article__today .date-count__item.active {
+          animation-play-state: running; }
+    .article__today.active .toady {
+      transform: translateX(0%); }
+    .article__today.active .date-count {
+      opacity: 1; }
 
 .footer {
   position: relative;
@@ -180,5 +188,10 @@
     transform: rotate(0deg); }
   100% {
     transform: rotate(360deg); } }
+@keyframes count_date {
+  0% {
+    transform: translateY(0px); }
+  100% {
+    transform: translateY(-4800px); } }
 
 /*# sourceMappingURL=style.css.map */

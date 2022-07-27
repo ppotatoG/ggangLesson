@@ -31,21 +31,26 @@ const countDate = () => {
         }, idx * 300);
     });
 };
-countDate();
+
+const scrollObserver = () => {
+    const targets = document.querySelectorAll('[data-ob=true]');
+
+    const io = new IntersectionObserver(entries => {
+        entries.forEach (entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('active')
+                if (/today/.test(entry.target.classList.value)) countDate();
+            }
+        })
+    }, {
+        threshold: .1
+    })
+
+    targets.forEach(target => {
+        io.observe(target);
+    })
+}
 
 (() => {
-
-    setTimeout(() => {
-        document.querySelector('section').classList.add('active');
-    },200);
-
+    scrollObserver();
 })();
-
-(() => {
-    const overlap = document.querySelector('.section_overlap');
-
-    setTimeout(() => {
-        overlap.classList.add('active')
-    }, 200)
-
-})()
