@@ -42,6 +42,7 @@ const scrollObserver = () => {
         entries.forEach (entry => {
             if(entry.isIntersecting) {
                 entry.target.classList.add('active')
+                // console.log(entry.target.dataset.obThreshold)
                 if (
                     /today/.test(entry.target.classList.value)
                     && countDateFlag
@@ -59,6 +60,24 @@ const scrollObserver = () => {
     })
 }
 
+const scrollMove = (el) => {
+    el.addEventListener('click', e => {
+        const moveClass = el.dataset.scrollMove;
+        const moveSection = document.querySelector(`.${moveClass}`);
+
+        window.scrollTo({
+            top: moveSection.offsetTop,
+            left: 0,
+            behavior: 'smooth'
+        });
+
+        e.preventDefault();
+    }, false)
+}
+
 (() => {
     scrollObserver();
+
+    const navButton = document.querySelectorAll('.js-scroll-move');
+    navButton.forEach(el => scrollMove(el));
 })();
