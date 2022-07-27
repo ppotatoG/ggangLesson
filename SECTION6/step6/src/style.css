@@ -5,11 +5,15 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 100;
+  z-index: 10;
   width: 100%;
-  height: 70px;
-  padding: 15px 20px;
+  height: 80px;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  backdrop-filter: saturate(1) blur(10px);
+  box-shadow: 0 0 20px 5px #202020;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-bottom-color: rgba(255, 255, 255, 0.2); }
@@ -28,7 +32,8 @@
   .article .title_wrap {
     padding-bottom: 80px;
     text-align: center;
-    font-family: 'NotoA'; }
+    font-family: 'NotoA';
+    color: #fff; }
     .article .title_wrap h2 {
       font-size: 60px;
       font-weight: 600; }
@@ -54,14 +59,14 @@
         line-height: 1;
         transition: transform .5s;
         text-decoration: none;
-        z-index: 11; }
+        z-index: 2; }
         .article__rotate .nav__item:hover {
           transform: translateX(-10px); }
           .article__rotate .nav__item:hover .nav__mask-under {
             width: 100%; }
       .article__rotate .nav__txt {
         position: relative;
-        z-index: 20;
+        z-index: 2;
         display: block;
         animation-name: text_opacity;
         animation-duration: 2s;
@@ -93,7 +98,7 @@
       position: absolute;
       left: 50%;
       top: 50%;
-      z-index: 10;
+      z-index: 1;
       width: 1200px;
       height: 1215px;
       margin-left: -357px;
@@ -122,7 +127,7 @@
       position: absolute;
       left: 20px;
       top: 400px;
-      z-index: 100;
+      z-index: 1;
       font-size: 300px;
       opacity: .1;
       transform: translateX(-100%);
@@ -240,6 +245,9 @@
       animation-play-state: paused; }
     .article__textMask.active .motion__text {
       animation-play-state: running; }
+  .article__overlap .title_wrap {
+    z-index: 5;
+    position: sticky; }
   .article__overlap .device {
     width: 300px;
     margin: 0 auto;
