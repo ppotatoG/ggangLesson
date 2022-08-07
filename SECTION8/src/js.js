@@ -1,160 +1,125 @@
-window.onload = function() {
+const isMobile = window.innerWidth <= 1024;
 
-    var scrollBody = document.querySelector('.fix_motion');
+const scrollFunc = () => {
+    if(isMobile) {
+        contentInMobile();
+    }else{
+        contentIn();
+    }
+}
 
-    var scrollHeight;
-    var sectionOffsetTop;
-    var sectionScrolTop;
-    var scrollRealHeight;
-    var winScrollTop;
-    var scrollPerecnt;
-    var percent;
-    var isMobile;
+const contentIn = () => {
+    const scrollBody = document.querySelector('.fix_motion');
 
-    function scrollFunc() {
+    const scrollHeight = scrollBody.offsetHeight;
+    const winScrollTop = window.pageYOffset;
+    const sectionOffsetTop = scrollBody.getBoundingClientRect().top + winScrollTop;
+    const scrollRealHeight = (scrollHeight - window.innerHeight);
+    const sectionScrollTop = winScrollTop - sectionOffsetTop;
+    const scrollPercent =  sectionScrollTop / scrollRealHeight;
+    const percent = scrollPercent * 100 ;
 
-        setProperty();
+    const deviceImg = document.querySelector('.device_fix .slide_wrap figure');
+    const imgWidth = deviceImg.offsetWidth;
 
-        if(isMobile) {
-            contentInMobile();
-        }else{
-            contentIn();
-        }
-    };
+    if(percent >= 12 && percent < 43){
+        imageChange(imgWidth * 0);
+        document.querySelector('.fix_motion .text_box .txt01').classList.add('active');
+    }
 
-    function setProperty() {
+    if(percent >= 43 && percent < 75) {
+        imageChange(imgWidth * 1);
+        document.querySelector('.fix_motion .text_box .txt02').classList.add('active');
+    }
 
-        isMobile = window.innerWidth <= 1024 ? true : false;
-        scrollHeight = scrollBody.offsetHeight;
-        winScrollTop = window.pageYOffset;
-        sectionOffsetTop = scrollBody.getBoundingClientRect().top + winScrollTop;
-        scrollRealHeight = (scrollHeight - window.innerHeight);
-        sectionScrolTop = winScrollTop - sectionOffsetTop;
-        scrollPerecnt =  sectionScrolTop / scrollRealHeight;
-        percent = scrollPerecnt * 100 ;
-    };
+    if(percent >= 75 && percent < 100) {
+        imageChange(imgWidth * 2);
+        document.querySelector('.fix_motion .text_box .txt03').classList.add('active');
+    }
 
-    function contentIn() {
+    if(percent >= 100) {
+        imageChange(imgWidth * 3);
+        document.querySelector('.fix_motion .text_box .txt04').classList.add('active');
+    }
 
-        var deviceImg = document.querySelector('.device_fix .slide_wrap figure');
-        var imgWidth = deviceImg.offsetWidth;
+    if(percent < 12 ){
+        document.querySelector('.fix_motion .text_box .txt01').classList.remove('active');
+        document.querySelector('.fix_motion .text_box .txt02').classList.remove('active');
+        document.querySelector('.fix_motion .text_box .txt03').classList.remove('active');
+        document.querySelector('.fix_motion .text_box .txt04').classList.remove('active');
+    }
+}
 
-        if(percent >= 12 && percent < 43){
+const contentInMobile = () => { //섹션 진입후 처리될 기능정의
 
-            imageChange(imgWidth * 0);
-            document.querySelector('.fix_motion .text_box .txt01').classList.add('active');
+    var deviceImg = document.querySelector('.device_fix .slide_wrap figure');
+    var imgWidth = deviceImg.offsetWidth;
 
-        }
+    if(percent >= 5 && percent < 25){
 
-        if(percent >= 43 && percent < 75) {
+        imageChange(imgWidth * 0);
+        document.querySelectorAll('.fix_motion .text_box p').forEach(function(el) {
+            el.classList.remove('active');
+        });
+        document.querySelector('.fix_motion .text_box .txt01').classList.add('active');
+    }
 
-            imageChange(imgWidth * 1);
-            document.querySelector('.fix_motion .text_box .txt02').classList.add('active');
+    if(percent >= 25 && percent < 45) {
 
-        }
+        imageChange(imgWidth * 1);
+        document.querySelectorAll('.fix_motion .text_box p').forEach(function(el) {
+            el.classList.remove('active');
+        })
+        document.querySelector('.fix_motion .text_box .txt02').classList.add('active');
+    }
 
-        if(percent >= 75 && percent < 100) {
+    if(percent >= 45 && percent < 65) {
 
-            imageChange(imgWidth * 2);
-            document.querySelector('.fix_motion .text_box .txt03').classList.add('active');
+        imageChange(imgWidth * 2);
+        document.querySelectorAll('.fix_motion .text_box p').forEach(function(el) {
+            el.classList.remove('active');
+        })
+        document.querySelector('.fix_motion .text_box .txt03').classList.add('active');
+    }
 
-        }
+    if(percent >= 65 && percent <= 85) {
 
-        if(percent >= 100) {
+        imageChange(imgWidth * 3);
+        document.querySelectorAll('.fix_motion .text_box p').forEach(function(el) {
+            el.classList.remove('active');
+        })
+        document.querySelector('.fix_motion .text_box .txt04').classList.add('active');
+    }
 
-            imageChange(imgWidth * 3);
-            document.querySelector('.fix_motion .text_box .txt04').classList.add('active');
+    if(percent > 85) {
+        imageChange(imgWidth * 3);
+        document.querySelectorAll('.fix_motion .text_box p').forEach(function(el) {
+            el.classList.remove('active');
+        });
+    }
 
-        }
+    if(percent < 0) {
 
-        if(percent < 12 ){
-            document.querySelector('.fix_motion .text_box .txt01').classList.remove('active');
-            document.querySelector('.fix_motion .text_box .txt02').classList.remove('active');
-            document.querySelector('.fix_motion .text_box .txt03').classList.remove('active');
-            document.querySelector('.fix_motion .text_box .txt04').classList.remove('active');
-        }
-    };
+        imageChange(imgWidth * 0);
+        document.querySelectorAll('.fix_motion .text_box p').forEach(function(el) {
+            el.classList.remove('active');
+        });
+    }
+};
 
-    function contentInMobile(){ //섹션 진입후 처리될 기능정의
+const imageChange = (moveX) => {
+    if(Modernizr.csspositionsticky){
+        const slideImg = document.querySelector('.slide_wrap .slide');
+        slideImg.style.transform = `translateX(-${moveX}px)`;
+    }
+}
 
-        var deviceImg = document.querySelector('.device_fix .slide_wrap figure');
-        var imgWidth = deviceImg.offsetWidth;
-
-        if(percent >= 5 && percent < 25){
-
-            imageChange(imgWidth * 0);
-            document.querySelectorAll('.fix_motion .text_box p').forEach(function(el) {
-                el.classList.remove('active');
-            });
-            document.querySelector('.fix_motion .text_box .txt01').classList.add('active');
-        }
-
-        if(percent >= 25 && percent < 45) {
-
-            imageChange(imgWidth * 1);
-            document.querySelectorAll('.fix_motion .text_box p').forEach(function(el) {
-                el.classList.remove('active');
-            })
-            document.querySelector('.fix_motion .text_box .txt02').classList.add('active');
-        }
-
-        if(percent >= 45 && percent < 65) {
-
-            imageChange(imgWidth * 2);
-            document.querySelectorAll('.fix_motion .text_box p').forEach(function(el) {
-                el.classList.remove('active');
-            })
-            document.querySelector('.fix_motion .text_box .txt03').classList.add('active');
-        }
-
-        if(percent >= 65 && percent <= 85) {
-
-            imageChange(imgWidth * 3);
-            document.querySelectorAll('.fix_motion .text_box p').forEach(function(el) {
-                el.classList.remove('active');
-            })
-            document.querySelector('.fix_motion .text_box .txt04').classList.add('active');
-        }
-
-        if(percent > 85) {
-            imageChange(imgWidth * 3);
-            document.querySelectorAll('.fix_motion .text_box p').forEach(function(el) {
-                el.classList.remove('active');
-            });
-        }
-
-        if(percent < 0) {
-
-            imageChange(imgWidth * 0);
-            document.querySelectorAll('.fix_motion .text_box p').forEach(function(el) {
-                el.classList.remove('active');
-            });
-        }
-    };
-
-    function imageChange(moveX) {
-
-        if(Modernizr.csspositionsticky){
-            var img = document.querySelector('.fix_motion .slide_wrap .slide');
-            img.style.transform = 'translateX('+ -moveX +'px)';
-        }
-
-    };
-
-    function init() {
-
-        scrollFunc();
-    };
-
+(() => {
     window.addEventListener('scroll', function() {
-
         scrollFunc();
     });
 
     window.addEventListener('resize', function() {
-
         scrollFunc();
     });
-
-    init();
-};
+})();
