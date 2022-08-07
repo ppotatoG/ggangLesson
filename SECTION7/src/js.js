@@ -1,81 +1,53 @@
-window.onload = function() {
+const motionRender = () => {
+    const scrollBody = document.querySelector('.fix_motion');
+    const titText = scrollBody.querySelector('.text_mask-start');
+    const maskLeft = scrollBody.querySelector('.black_mask-left');
+    const maskRight = scrollBody.querySelector('.black_mask-right');
+    const bgImage = scrollBody.querySelector('.bg_img');
+    const endingContent = scrollBody.querySelector('.text_mask-ending');
 
-    var scrollBody = document.querySelector('.fix_motion');
-    var titText = scrollBody.querySelector('.intro_txt');
-    var maskLeft = scrollBody.querySelector('.left_mask');
-    var maskRight = scrollBody.querySelector('.right_mask');
-    var bgImage = scrollBody.querySelector('.bg_img');
-    var endingContent = scrollBody.querySelector('.ending_txt');
+    const scrollHeight = scrollBody.offsetHeight;
+    const winScrollTop = window.pageYOffset;
+    const sectionOffsetTop = scrollBody.getBoundingClientRect().top + window.pageYOffset;
+    const scrollRealHeight = (scrollHeight - window.innerHeight);
+    const sectionScrollTop = winScrollTop - sectionOffsetTop;
+    const scrollPercent =  sectionScrollTop / scrollRealHeight;
+    const percent = scrollPercent * 100 ;
 
-    var scrollHeight;
-    var sectionOffsetTop;
-    var sectionScrolTop;
-    var scrollRealHeight;
-    var winScrollTop;
-    var scrollPerecnt;
-    var percent;
+    const maskStartValue = 50;
+    const maskEndValue = 0;
+    const zoomValue = 1.5;
+    const zoomOutValue = 1;
+    const maskVal = Math.max(maskEndValue, maskStartValue - (scrollPercent * maskStartValue));
+    const scaleVal = Math.max(zoomOutValue, zoomValue - (scrollPercent * zoomValue));
 
-    function changeOverlap() {
+    maskLeft.style.width = `${maskVal}%`
+    maskRight.style.width =  `${maskVal}%`;
+    bgImage.style.transform = `scale(${scaleVal})`;
 
-        setProperty();
+    if(percent > 0.3){
+        titText.classList.add('active');
+    }else{
+        titText.classList.remove('active');
+    }
+
+    if(percent >= 70){
+        endingContent.classList.add('active');
+    }else {
+        endingContent.classList.remove('active');
+    }
+}
+
+(() => {
+    if(Modernizr.csspositionsticky){
         motionRender();
-    };
 
-    function setProperty() {
-
-        scrollHeight = scrollBody.offsetHeight;
-        winScrollTop = window.pageYOffset;
-        sectionOffsetTop = scrollBody.getBoundingClientRect().top + window.pageYOffset;
-        scrollRealHeight = (scrollHeight - window.innerHeight);
-        sectionScrolTop = winScrollTop - sectionOffsetTop;
-        scrollPerecnt =  sectionScrolTop / scrollRealHeight;
-        percent = scrollPerecnt * 100 ;
-    };
-
-    function motionRender() {
-
-        var maskStartValue = 50;
-        var maskEndValue = 0;
-        var zoomValue = 1.5;
-        var zoomOutValue = 1;
-        var maskVal = Math.max(maskEndValue, maskStartValue - (scrollPerecnt * maskStartValue));
-        var scaleVal = Math.max(zoomOutValue, zoomValue - (scrollPerecnt * zoomValue));
-
-        maskLeft.style.width = maskVal + '%'
-        maskRight.style.width =  maskVal + '%';
-        bgImage.style.transform = 'scale('+ scaleVal +')';
-
-        if(percent > 0.3){
-            titText.classList.add('active');
-        }else{
-            titText.classList.remove('active');
-        }
-
-        if(percent >= 70){
-            endingContent.classList.add('active');
-        }else {
-            endingContent.classList.remove('active');
-        }
-    };
-
-    function init(){
-        changeOverlap();
-        bindEvent();
-    };
-
-    function bindEvent(){
         window.addEventListener('scroll', function() {
-            changeOverlap();
+            motionRender();
         });
 
         window.addEventListener('resize', function() {
-            changeOverlap();
+            motionRender();
         });
-
-    };
-
-    if(Modernizr.csspositionsticky){
-        init();
-    };
-
-};
+    }
+})()
