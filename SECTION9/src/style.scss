@@ -21,130 +21,117 @@
 
 .fix_motion {
     height: 7000px;
-}
-
-.no-csspositionsticky .fix_motion {
-    height: auto;
-}
-
-.fix_motion .fix_wrap {
-    overflow: hidden;
-    position: sticky;
-    position: -webkit-sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-}
-
-.no-csspositionsticky .fix_wrap {
-    position: relative;
-}
-
-.fix_motion .fix_wrap .cont_box {
-    overflow: hidden;
-    position: relative;
-    height: 100%;
-
-    .canvas_wrap {
-        position: relative;
+    .fix_wrap {
+        overflow: hidden;
+        position: sticky;
+        position: -webkit-sticky;
+        top: 0;
+        left: 0;
         width: 100%;
-        height: 100%;
+        height: 100vh;
+        .cont_box {
+            overflow: hidden;
+            position: relative;
+            height: 100%;
 
-        canvas {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            -webkit-transform: translate(-50%, -50%);
-            -moz-transform: translate(-50%, -50%);
-            -o-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
+            .canvas_wrap {
+                position: relative;
+                width: 100%;
+                height: 100%;
+
+                canvas {
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                .no_canvas {
+                    display: none;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    width: 1920px;
+                    height: 1080px;
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+            .txt {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                z-index: 30;
+                font-size: 24px;
+                color: transparent;
+                transition: color .5s .5s;
+
+                &.pos1 {
+                    margin-left: 380px;
+                    margin-top: -230px;
+                }
+
+                &.pos2 {
+                    margin-left: -500px;
+                    margin-top: -50px;
+
+                    &:after {
+                        left: auto;
+                        right: -80%;
+                    }
+                }
+
+                &.pos3 {
+                    margin-left: 150px;
+                    margin-top: 100px;
+                }
+
+                &.active {
+                    color: #000;
+                    &::after {
+                        width: 80%;
+                    }
+                }
+
+                &::after {
+                    position: absolute;
+                    left: -80%;
+                    top: 18px;
+                    z-index: 10;
+                    width: 0;
+                    height: 1px;
+                    background: #000;
+                    content: "";
+                    transition: width .5s;
+                }
+            }
         }
     }
 }
 
-.no-csspositionsticky .fix_motion .fix_wrap .cont_box .canvas_wrap canvas {
-    display: none;
-}
-
-.fix_motion .fix_wrap .cont_box .canvas_wrap .no_canvas {
-    display: none;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 1920px;
-    height: 1080px;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-}
-
-.no-csspositionsticky .fix_motion .fix_wrap .cont_box .canvas_wrap .no_canvas {
-    display: block;
-}
-
-.fix_motion .fix_wrap .cont_box .txt {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    z-index: 30;
-    font-size: 24px;
-    color: transparent;
-    transition: color .5s .5s;
-
-    &.active {
-        color: #000;
-    }
-}
-
-.no-csspositionsticky .fix_motion .fix_wrap .cont_box .txt {
-    color: #000;
-}
-
-.fix_motion .fix_wrap .cont_box .txt {
-    &:after {
-        position: absolute;
-        left: -80%;
-        top: 18px;
-        z-index: 10;
-        width: 0%;
-        height: 1px;
-        background: #000;
-        content: "";
-        transition: width .5s;
-    }
-
-    &.active:after {
-        width: 80%;
-    }
-}
-
-.no-csspositionsticky .fix_motion .fix_wrap .cont_box .txt:after {
-    width: 80%;
-}
-
-.fix_motion .fix_wrap .cont_box .txt {
-    &.pos1 {
-        margin-left: 380px;
-        margin-top: -230px;
-    }
-
-    &.pos2 {
-        margin-left: -500px;
-        margin-top: -50px;
-
-        &:after {
-            left: auto;
-            right: -80%;
+.no-csspositionsticky {
+    .fix_motion {
+        height: auto;
+        .fix_wrap {
+            position: relative;
+            .cont_box  {
+                .canvas_wrap {
+                    canvas {
+                        display: none;
+                    }
+                    .no_canvas {
+                        display: block;
+                    }
+                }
+                .txt {
+                    color: #000;
+                    &:after {
+                        width: 80%;
+                    }
+                }
+            }
         }
-    }
 
-    &.pos3 {
-        margin-left: 150px;
-        margin-top: 100px;
     }
 }
 
@@ -169,7 +156,7 @@
                 }
 
                 &.pos1 {
-                    margin-left: 0px;
+                    margin-left: 0;
                     margin-top: -220px;
                     transform: rotate(-90deg);
                 }
